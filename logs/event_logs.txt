@@ -1,0 +1,4 @@
+TIMESTAMP : 2022-04-09T22:01:26.444302Z | LOGTYPE : EVENT_LOGGER | HOSTNAME : hostname | USERNAME : bharatwaaj | MESSAGE : ERROR { db/db1/tables (Is a directory) } | 
+TIMESTAMP : 2022-04-09T22:01:26.448832Z | LOGTYPE : EVENT_LOGGER | HOSTNAME : hostname | USERNAME : bharatwaaj | MESSAGE : ERROR { db/db1/tables (Is a directory) } | 
+TIMESTAMP : 2022-04-09T22:02:38.917604Z | LOGTYPE : EVENT_LOGGER | HOSTNAME : hostname | USERNAME : bharatwaaj | MESSAGE : Error: Failed to generate ERD for database db/db1tables/db1. Invalid database name! | 
+TIMESTAMP : 2022-04-09T22:03:34.024946Z | LOGTYPE : EVENT_LOGGER | HOSTNAME : hostname | USERNAME : bharatwaaj | MESSAGE : ERROR { db/db1/tables/students (Is a directory) } | 

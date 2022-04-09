@@ -6,10 +6,12 @@ package ca.dal.distributed.dpg1.Utils;
  */
 public class GlobalConstants {
 
-    public static final String DELIMITER = "|+|";
+    public static final String DELIMITER = "\\|\\+\\|";
     public static final String DATABASE_PATH = "db/";
+    public static final String TABLES_PATH = "tables/";
     public static final String PRIMARY_KEY_CONSTRAINT = "PK";
     public static final String FOREIGN_KEY_CONSTRAINT = "FK";
+    public static final String EXTENSION_METADATA_FILE = "_metadata.txt";
 
     public static final String TABLE_NAME_DELIMITER = "\\.";
 

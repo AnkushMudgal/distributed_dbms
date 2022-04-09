@@ -1,6 +1,9 @@
 package ca.dal.distributed.dpg1.Utils;
 
 import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -29,7 +32,24 @@ public final class GlobalUtils {
      * @description Reads all tables from the specified database path
      */
     public static File[] readAllTables(final String databasePath) {
-        final File allTables = new File(databasePath);
-        return allTables.listFiles();
+        final File allTableDirs = new File(databasePath);
+        List<File> results = new ArrayList<File>();
+        String[] tableNameDirs = allTableDirs.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File current, String name) {
+                return new File(current, name).isDirectory();
+            }
+        });
+        for(String tableName : tableNameDirs) {
+            final File tableNameFile = new File(databasePath + tableName);
+            File[] tableFiles = tableNameFile.listFiles();
+            for(File tableFile: tableFiles){
+                if(!tableFile.toString().contains(GlobalConstants.EXTENSION_METADATA_FILE)){
+                    results.add(tableFile);
+                }
+            }
+        }
+        System.out.println(results.toString());
+        return results.toArray(new File[0]);
     }
 }

@@ -1,0 +1,10 @@
+Database: queries
+Table: students
+Columns:
+	Column 1: id (Datatype: INT)
+Database: queries
+Table: students
+Columns:
+	Column 1: id (Datatype: INT)
+	Column 2: name (Datatype: TEXT)
+	Column 3: email (Datatype: TEXT)
