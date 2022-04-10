@@ -8,6 +8,10 @@ import java.util.Scanner;
 import ca.dal.distributed.dpg1.Controllers.ERDModule.Exceptions.ERDGeneratorException;
 import ca.dal.distributed.dpg1.Controllers.ERDModule.Main.ERDGenerator;
 import ca.dal.distributed.dpg1.Controllers.ERDModule.Main.ERDGeneratorMain;
+import ca.dal.distributed.dpg1.Controllers.QueryProcessingModule.Exceptions.QueryExecutionRuntimeException;
+import ca.dal.distributed.dpg1.Controllers.QueryProcessingModule.Exceptions.QueryParseFailureException;
+import ca.dal.distributed.dpg1.Controllers.QueryProcessingModule.Main.QueryExecutor;
+import ca.dal.distributed.dpg1.Controllers.TransactionModule.Exceptions.TransactionExceptions;
 
 /**
  * Hello world!
@@ -15,10 +19,12 @@ import ca.dal.distributed.dpg1.Controllers.ERDModule.Main.ERDGeneratorMain;
 public class App {
 
         static ERDGeneratorMain erdGenerator = new ERDGenerator();
+        static QueryExecutor executor = new QueryExecutor();
 
-        public static void main(String[] args) throws NoSuchAlgorithmException, IOException, ERDGeneratorException {
-                
-                Scanner c = new Scanner(System.in);
+        public static void main(String[] args) throws NoSuchAlgorithmException, IOException, ERDGeneratorException, QueryExecutionRuntimeException, QueryParseFailureException, TransactionExceptions {
+
+                // Scanner c = new Scanner(System.in);
+                Console c = System.console();
                 String userName;
                 String pass, passConfirm, securityAnswer;
                 char[] ch, ch1;
@@ -41,14 +47,15 @@ public class App {
                         switch (access_option) {
                                 case 1:
                                         System.out.println("\nEnter your name: ");
-                                        userName = c.nextLine();
+                                        userName = c.readLine();
                                         System.out.println("\nEnter password: ");
-//                                        ch = c.readPassword();
-                                        pass=c.nextLine();
-//                                        pass = String.valueOf(ch);
+                                        ch = c.readPassword();
+                                        pass = String.valueOf(ch);
+                                        // pass = c.nextLine();
                                         System.out.println("\nAnswer the following Security Question:");
                                         System.out.println("\nWhat primary school did you attend?");
-                                        securityAnswer = c.nextLine();
+                                        // securityAnswer = c.nextLine();
+                                        securityAnswer = c.readLine();
                                         loginValidation = chk_login.checkLogin(userName, pass, securityAnswer);
                                         if (loginValidation) {
                                                 System.out.println("\nSucessfully Logged in as:" + userName);
@@ -70,28 +77,32 @@ public class App {
                                                                 System.out.println(
                                                                                 "\nEnter Query or Transaction, Enter x to Exit:");
                                                                 while (!Query.equals("x")) {
-                                                                                Query = c.nextLine();
-                                                                                if (!Query.equals("x")) {
+                                                                        // Query = c.nextLine();
+                                                                        Query = c.readLine();
+                                                                        if (!Query.equals("x")) {
+                                                                                executor.processInputQuery(Query);
                                                                                 System.out.println(Query);
                                                                         }
                                                                 }
                                                                 break;
-                                                        // Export Query Function        
+                                                        // Export Query Function
                                                         case 2:
                                                                 System.out.println("\nExport Function Exectution");
                                                                 break;
-                                                        // ERD Function                
+                                                        // ERD Function
                                                         case 3:
-                                                                System.out.println("\nEnter Database Name to generate ERD");
-                                                                Query = c.nextLine();
+                                                                System.out.println(
+                                                                                "\nEnter Database Name to generate ERD");
+                                                                // Query = c.nextLine();
+                                                                Query = c.readLine();
                                                                 System.out.println("\nERD:");
                                                                 erdGenerator.generateERD(Query);
                                                                 break;
-                                                        // Analytics Function                        
+                                                        // Analytics Function
                                                         case 4:
                                                                 System.out.println("\nAnalytics Function Exectution");
                                                                 break;
-                                                        // Exit        
+                                                        // Exit
                                                         case 5:
                                                                 System.out.println("\nExiting......");
                                                                 break;
@@ -103,31 +114,33 @@ public class App {
                                         break;
                                 case 2:
                                         System.out.println("\nset your name: ");
-                                        userName = c.nextLine();
+                                        // userName = c.nextLine();
+                                        userName = c.readLine();
                                         System.out.println("\nset your password: ");
-//                                        ch = c.nextLine();
-                                        pass =c.nextLine();
-//                                        pass = String.valueOf(ch);
+                                        ch = c.readPassword();                                        
+                                        pass = String.valueOf(ch);
+                                        // pass = c.nextLine();
                                         System.out.println("\nEnter password once again: ");
-//                                        ch1 = c.readPassword();
-                                        passConfirm=c.nextLine();
-//                                        passConfirm = String.valueOf(ch1);
+                                        ch1 = c.readPassword();                                        
+                                        passConfirm = String.valueOf(ch1);
+                                        // passConfirm = c.nextLine();
                                         System.out.println(pass);
                                         System.out.println(passConfirm);
                                         while (!pass.equals(passConfirm)) {
                                                 System.out.println("\nPasswords did not matched");
                                                 System.out.println("\nset your password: ");
-//                                                ch = c.readPassword();
-                                                 pass=c.nextLine();
-//                                                pass = String.valueOf(ch);
+                                                ch = c.readPassword();                                                
+                                                pass = String.valueOf(ch);
+                                                // pass = c.nextLine();
                                                 System.out.println("\nEnter password once again: ");
-//                                                ch = c.readPassword();
-                                                passConfirm=c.nextLine();
-//                                                passConfirm = String.valueOf(ch);
+                                                ch = c.readPassword();                                                
+                                                passConfirm = String.valueOf(ch);
+                                                // passConfirm = c.nextLine();
                                         }
                                         System.out.println("\nAnswer the following Security Question:");
                                         System.out.println("\nWhat primary school did you attend?");
-                                        securityAnswer = c.nextLine();
+                                        // securityAnswer = c.nextLine();
+                                        securityAnswer = c.readLine();
                                         reg.setRegister(userName, pass, securityAnswer);
                                         System.out.println("\nSucessfully Registered, Please Login now...");
                                         break;
